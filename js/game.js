@@ -62,7 +62,7 @@ var Game = {
             Entities.init(data);
             Render.init(data);
 
-            //Game.run(data);
+            Game.run(data);
         });
 
     },
@@ -106,9 +106,25 @@ var Game = {
 
         loop();
 
-    }   
+    },
+
+    input: function (data) {
+        
+    },
+
+    update: function (data) {
+
+    },
+
+    render: function (data){
+
+        Render.update(data);
+    }
+
+
 
 };
 //Very neat trick, JQuery doesnt only return DOM element, to access DOM use index
 //console.log($("#bg-canvas")[0]);
 Game.init();
+//Game.run();

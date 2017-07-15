@@ -7,6 +7,29 @@ var Render = {
         Render.helpers.drawEntity(data.entities.background, data.canvas.bgCtx);
     },
 
+    //Need to render coins on the screen, but coins are different than background
+    //because they get updated and deleted (from the array) once the character
+    //has moved onto their location. So therefore we will place it in the update function.
+    //Also we are "animating them" by keep deleting and putting them back.. redrawing
+    //them on the board with different sprites
+
+    update: function(data){
+        //Everytime an update comes in we clear the previous foreground canvas (because all coin pieces displayed at start)
+        //maybe there is a better solution
+        // and the drawings on it
+
+
+        data.canvas.fgCtx.clearRect(0, 0, data.canvas.fgCtx.width, data.canvas.fgCtx.height);
+        //Draw coins
+        data.entities.coinsArray.forEach(function (coin) {
+
+            Render.helpers.drawEntity(coin, data.canvas.fgCtx);
+
+        });
+
+    },
+    
+
     helpers: {
         
         //Need to pass in the entity (object) and the context! background or foreground!
@@ -21,6 +44,7 @@ var Render = {
                           entity.sprite.srcW, entity.sprite.srcH,
                           entity.x, entity.y,
                           entity.w, entity.h
+                          
                          )
         },
 
