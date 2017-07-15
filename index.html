@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+
+    <title>LumberJack Underground JS</title>
+
+    <link href="css/stylesheet.css" rel="stylesheet" />
+</head>
+
+<body>
+    <!--Very cool technique being used here. Two canvases, one for foreground and one for
+    background. The foreground canvas will contain game entities such as coins, character,
+    anything that "mario" interacts with." Background doesnt change so we have a
+    background canvas as well. -->
+
+    <!--The width and height of canvas are not random, they are scaled to about 3 times
+    the sprite image size, scaled up and dependent upon the sprites. Foreground
+    canvas has a higher Z-index, this way it will be placed on top of background canvas! -->
+
+
+
+    <canvas id="bg-canvas" width="768" height="600"></canvas>
+    <canvas id="fg-canvas" width="768" height="600"></canvas>
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/input.js"></script>
+    <script src="js/entities.js"></script>
+    <script src="js/render.js"></script>
+    <script src="js/game.js"></script>
+</body>
+
+</html>
