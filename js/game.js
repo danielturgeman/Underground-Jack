@@ -113,7 +113,7 @@ var Game = {
     },
 
     update: function (data) {
-
+        Animation.update(data);
     },
 
     render: function (data){

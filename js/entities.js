@@ -48,12 +48,44 @@ var Entities = {
         },
 
         Coin: function(img, targetX, targetY, targetW, targetH){
+            
+            //self now has a reference to whichever Coin object we are on (constructor)
+            var self = this;
             this.type = "coin";
             this.sound = new Audio("audio/lumberjack_coin.mp3");
             //this.sprite = new Entities.helpers.Sprite(img, srcX, srcY, srcW, srcH);
             //There will be many "targets" due to many coins so we have many different locatins 
-            this.sprite = new Entities.helpers.Sprite(img, 99, 0, 10, 14);
+            //To create coin animatiion we need 4 different sprites in our case, start with originl coin
 
+            this.sprite = new Entities.helpers.Sprite(img, 99, 0, 10, 14);
+           this.spriteAnimations = {
+                spin: {
+                    frames: [new Entities.helpers.Sprite(img, 99, 0, 10, 14),
+                             new Entities.helpers.Sprite(img, 115, 0, 10, 14),
+                             new Entities.helpers.Sprite(img, 131, 0, 10, 14),
+                             new Entities.helpers.Sprite(img, 147, 0, 10, 14)],
+
+                    currentFrame: 0
+                }
+            }
+
+            this.states = {
+                spinning: {
+                    animation: function (data){
+                        //every 13 frames
+                        //change the coin sprite to the sprite of currentframe
+                        if(data.animationFrame % 13 == 0){
+                            self.sprite = self.spriteAnimations.spin.frames[self.spriteAnimations.spin.currentFrame];
+                            self.spriteAnimations.spin.currentFrame++;
+                            if(self.spriteAnimations.spin.currentFrame > 3){
+                                self.spriteAnimations.spin.currentFrame = 0;
+                            }
+                        }
+                    }
+                }
+            }
+
+            this.currentState = self.states.spinning;
             this.x = targetX;
             this.y = targetY;
             this.w = targetW;
